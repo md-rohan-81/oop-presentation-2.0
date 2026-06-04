@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java & Cloud Computing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="particleCanvas"></canvas>
+<div class="progress-bar" id="progress"></div>
+<!-- PREV BUTTON -->
+<button class="slide-nav-btn" id="prevBtn" aria-label="Previous slide">
+  <svg class="btn-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <!-- corner bracket ticks -->
+    <polyline class="btn-corner" points="14,20 14,14 20,14"/>
+    <polyline class="btn-corner" points="44,14 50,14 50,20"/>
+    <polyline class="btn-corner" points="50,44 50,50 44,50"/>
+    <polyline class="btn-corner" points="20,50 14,50 14,44"/>
+    <!-- ghost trail arrows (faint, offset) -->
+    <g class="btn-trail" opacity="0.15" transform="translate(6,0)">
+      <line x1="42" y1="32" x2="24" y2="32"/>
+      <polyline points="30,26 24,32 30,38"/>
+    </g>
+    <g class="btn-trail" opacity="0.08" transform="translate(11,0)">
+      <line x1="42" y1="32" x2="24" y2="32"/>
+      <polyline points="30,26 24,32 30,38"/>
+    </g>
+    <!-- main arrow group (animated on hover) -->
+    <g class="btn-arrow-group" style="transform-origin:32px 32px">
+      <line class="btn-arrow-shaft" x1="42" y1="32" x2="23" y2="32"/>
+      <polyline class="btn-arrow-head" points="30,25 22,32 30,39"/>
+    </g>
+  </svg>
+</button>
+
+<!-- NEXT BUTTON -->
+<button class="slide-nav-btn" id="nextBtn" aria-label="Next slide">
+  <svg class="btn-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <polyline class="btn-corner" points="14,20 14,14 20,14"/>
+    <polyline class="btn-corner" points="44,14 50,14 50,20"/>
+    <polyline class="btn-corner" points="50,44 50,50 44,50"/>
+    <polyline class="btn-corner" points="20,50 14,50 14,44"/>
+    <!-- ghost trail arrows -->
+    <g class="btn-trail" opacity="0.15" transform="translate(-6,0)">
+      <line x1="22" y1="32" x2="40" y2="32"/>
+      <polyline points="34,26 40,32 34,38"/>
+    </g>
+    <g class="btn-trail" opacity="0.08" transform="translate(-11,0)">
+      <line x1="22" y1="32" x2="40" y2="32"/>
+      <polyline points="34,26 40,32 34,38"/>
+    </g>
+    <g class="btn-arrow-group" style="transform-origin:32px 32px">
+      <line class="btn-arrow-shaft" x1="22" y1="32" x2="41" y2="32"/>
+      <polyline class="btn-arrow-head" points="34,25 42,32 34,39"/>
+    </g>
+  </svg>
+</button>
+
+<nav>
+  <div class="nav-brand">JAVA ✕ CLOUD</div>
+  <div class="nav-slides" id="navDots"></div>
+  <button class="fullscreen-btn" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Toggle Fullscreen (F)">
+    <svg class="fs-icon fs-enter" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="3,9 3,3 9,3"/>
+      <polyline points="15,3 21,3 21,9"/>
+      <polyline points="21,15 21,21 15,21"/>
+      <polyline points="9,21 3,21 3,15"/>
+    </svg>
+    <svg class="fs-icon fs-exit" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+      <polyline points="9,3 9,9 3,9"/>
+      <polyline points="21,9 15,9 15,3"/>
+      <polyline points="15,21 15,15 21,15"/>
+      <polyline points="3,15 9,15 9,21"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- SLIDE 1: TITLE -->
+<section class="slide slide-title" id="slide-1" data-num="01">
+  <div class="slide-inner" style="z-index:2;">
+    <div class="title-eyebrow">Group Presentation</div>
+    <h1 class="title-main glitch" data-text="JAVA &amp; CLOUD COMPUTING">JAVA &amp;<br><span>CLOUD</span><br>COMPUTING</h1>
+    <div class="title-divider"></div>
+    <p class="title-sub"><span class="typewriter">Explore how Java integrates with cloud platforms to build scalable, resilient, and cost-efficient applications.</span></p>
+    <div class="title-badge">Frameworks · Deployment · Security · Microservices</div>
+  </div>
+</section>
+
+<!-- SLIDE 2: OVERVIEW -->
+<section class="slide" id="slide-2" data-num="02">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">02</span><span class="slide-line"></span><span class="slide-tag">Overview</span></div>
+    <h2 class="reveal">OVER<span class="red">VIEW</span></h2>
+    <div class="content-grid">
+      <div class="card highlight">
+        <div class="card-title">Cloud Computing</div>
+        <p>On-demand delivery of computing services via the Internet — enabling scalable infrastructure, platforms, and software accessible from anywhere.</p>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">Java Language</div>
+        <p>Platform-independent, object-oriented language widely used for enterprise applications. Runs on the JVM, making it cloud-ready across any environment.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Purpose</div>
+        <p>Explore how Java integrates with cloud platforms to build scalable, resilient, and cost-efficient applications across AWS, GCP, and beyond.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Presentation Flow</div>
+        <ul>
+          <li>Basics of Cloud Computing</li>
+          <li>Java Frameworks &amp; Microservices</li>
+          <li>AWS &amp; GCP Deployment</li>
+          <li>Security → Case Study → Future Trends</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: OBJECTIVES -->
+<section class="slide" id="slide-3" data-num="03">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">03</span><span class="slide-line"></span><span class="slide-tag">Objectives</span></div>
+    <h2 class="reveal">PRESEN<span class="red">TATION</span> OBJECTIVES</h2>
+    <div class="obj-list">
+      <div class="obj-item"><span class="obj-icon">☁️</span><span class="obj-text">Explain cloud computing fundamentals and service models (IaaS, PaaS, SaaS).</span></div>
+      <div class="obj-item"><span class="obj-icon">☕</span><span class="obj-text">Introduce Java cloud frameworks — Spring Cloud, Micronaut, and Quarkus.</span></div>
+      <div class="obj-item"><span class="obj-icon">🔧</span><span class="obj-text">Discuss microservices architecture and its advantages over monolithic systems.</span></div>
+      <div class="obj-item"><span class="obj-icon">🚀</span><span class="obj-text">Demonstrate deployment of Java apps on AWS and Google Cloud Platform.</span></div>
+      <div class="obj-item"><span class="obj-icon">🔒</span><span class="obj-text">Cover cloud security best practices — OAuth2, JWT, IAM, TLS, RBAC.</span></div>
+      <div class="obj-item"><span class="obj-icon">🎬</span><span class="obj-text">Present a real-world case study: Netflix's cloud migration journey.</span></div>
+      <div class="obj-item"><span class="obj-icon">🔭</span><span class="obj-text">Highlight future trends in Java cloud development — serverless, AI/ML, multi-cloud.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: BASICS OF CLOUD -->
+<section class="slide" id="slide-4" data-num="04">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">04</span><span class="slide-line"></span><span class="slide-tag">Fundamentals</span></div>
+    <h2 class="reveal">BASICS OF <span class="red">CLOUD</span> COMPUTING</h2>
+    <div class="content-grid three">
+      <div class="card">
+        <div class="card-title">Service Models</div>
+        <ul>
+          <li><strong>IaaS</strong> — AWS EC2, Google Compute Engine</li>
+          <li><strong>PaaS</strong> — Google App Engine, AWS Elastic Beanstalk</li>
+          <li><strong>SaaS</strong> — Gmail, Office 365</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Benefits</div>
+        <ul>
+          <li>Elastic scalability</li>
+          <li>Flexibility &amp; remote access</li>
+          <li>Cost efficiency (pay-as-you-go)</li>
+          <li>Disaster recovery</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Challenges</div>
+        <ul>
+          <li>Security risks</li>
+          <li>Vendor lock-in</li>
+          <li>Network dependency</li>
+          <li>Regulatory compliance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">PUBLIC CLOUD</span>
+      <span class="tag">PRIVATE CLOUD</span>
+      <span class="tag">HYBRID CLOUD</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: JAVA IN CLOUD -->
+<section class="slide" id="slide-5" data-num="05">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">05</span><span class="slide-line"></span><span class="slide-tag">Java</span></div>
+    <h2 class="reveal">IMPORTANCE OF <span class="red">JAVA</span> IN CLOUD</h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Platform Independence</div>
+        <p>Java runs on the JVM — write once, run anywhere. Ideal for multi-cloud and hybrid cloud environments without code changes.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Enterprise Scalability</div>
+        <p>Proven robustness for high-traffic, distributed applications. Rich ecosystem of battle-tested libraries and frameworks.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Architecture Support</div>
+        <ul>
+          <li>Microservices architecture</li>
+          <li>Serverless functions</li>
+          <li>Container-based deployments</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">DevOps Integration</div>
+        <p>Seamless integration with CI/CD pipelines for automated testing and deployments. Compatible with Docker, Kubernetes, and cloud-native tooling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: FRAMEWORKS -->
+<section class="slide" id="slide-6" data-num="06">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">06</span><span class="slide-line"></span><span class="slide-tag">Frameworks</span></div>
+    <h2 class="reveal">JAVA CLOUD <span class="red">FRAMEWORKS</span></h2>
+    <div class="content-grid">
+      <div class="card highlight">
+        <div class="card-title">Spring Cloud</div>
+        <ul>
+          <li>Centralized configuration</li>
+          <li>Service discovery</li>
+          <li>Fault tolerance</li>
+          <li>Intelligent routing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Jakarta EE / Java EE</div>
+        <p>Enterprise-grade APIs for building cloud-ready applications with comprehensive standards for security, persistence, and messaging.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Micronaut</div>
+        <p>Lightweight framework optimized for containers and serverless functions. Low memory footprint, fast startup times.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Quarkus</div>
+        <p>Kubernetes-native Java framework designed for GraalVM and HotSpot. Optimized for cloud-native deployments with minimal resource usage.</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">RAPID DEVELOPMENT</span>
+      <span class="tag">CLOUD INTEGRATION</span>
+      <span class="tag">MAINTAINABILITY</span>
+      <span class="tag">SCALABILITY</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: MICROSERVICES -->
+<section class="slide" id="slide-7" data-num="07">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">07</span><span class="slide-line"></span><span class="slide-tag">Architecture</span></div>
+    <h2 class="reveal">MICRO<span class="red">SERVICES</span> ARCHITECTURE</h2>
+    <div class="content-grid">
+      <div class="card highlight" style="grid-column: 1/-1;">
+        <div class="card-title">Definition</div>
+        <p>An application split into small, independently deployable services — each responsible for a specific business capability, communicating via APIs.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Advantages</div>
+        <ul>
+          <li>Independent deployment</li>
+          <li>Fault isolation</li>
+          <li>Faster development &amp; updates</li>
+          <li>Better scalability per service</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">vs Monolithic Apps</div>
+        <ul>
+          <li>Harder to scale as a whole</li>
+          <li>Risky, large deployments</li>
+          <li>Difficult to maintain over time</li>
+          <li>Single point of failure</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: SPRING CLOUD COMPONENTS -->
+<section class="slide" id="slide-8" data-num="08">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">08</span><span class="slide-line"></span><span class="slide-tag">Spring Cloud</span></div>
+    <h2 class="reveal">SPRING CLOUD <span class="red">COMPONENTS</span></h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Eureka</div>
+        <p>Service discovery — dynamically locates and registers microservices so they can communicate without hardcoded addresses.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Config Server</div>
+        <p>Centralized configuration management — externalizes configuration for all environments from a single source of truth.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Gateway / Ribbon</div>
+        <p>Load balancing and intelligent routing — distributes requests across service instances for high availability and performance.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Hystrix</div>
+        <p>Circuit breaker pattern — prevents cascading failures by stopping calls to failing services and providing fallback responses.</p>
+      </div>
+    </div>
+    <div class="slide-divider"></div>
+    <p style="color:var(--gray); font-size:0.9rem;">Together, these components ensure microservices are <strong style="color:var(--red);">resilient, scalable, and maintainable</strong>.</p>
+  </div>
+</section>
+
+<!-- SLIDE 9: JAVA + MICROSERVICES -->
+<section class="slide" id="slide-9" data-num="09">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">09</span><span class="slide-line"></span><span class="slide-tag">Integration</span></div>
+    <h2 class="reveal">JAVA &amp; <span class="red">MICROSERVICES</span> INTEGRATION</h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">RESTful APIs</div>
+        <p>Spring Boot powers lightweight, production-ready REST APIs for seamless service-to-service communication over HTTP/JSON.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Async Messaging</div>
+        <ul>
+          <li>Apache Kafka — event streaming</li>
+          <li>RabbitMQ — message queuing</li>
+          <li>Decoupled service communication</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Containerization</div>
+        <p>Docker packages each microservice with its dependencies into portable containers — ensuring consistent deployments across environments.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Monitoring &amp; Logging</div>
+        <ul>
+          <li>Spring Actuator — health metrics</li>
+          <li>Prometheus — metrics collection</li>
+          <li>Grafana — visualization dashboards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10: AWS DEPLOYMENT -->
+<section class="slide" id="slide-10" data-num="10">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">10</span><span class="slide-line"></span><span class="slide-tag">AWS</span></div>
+    <h2 class="reveal">DEPLOYMENT ON <span class="red">AWS</span></h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Key AWS Services</div>
+        <ul>
+          <li>EC2 — virtual machines</li>
+          <li>Lambda — serverless functions</li>
+          <li>S3 — object storage</li>
+          <li>RDS — managed databases</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Deployment Steps</div>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><span class="step-text">Build Java app (JAR/WAR)</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">Package as Docker container image</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">Deploy to AWS environment</span></div>
+          <div class="step"><span class="step-num">4</span><span class="step-text">Configure networking, IAM, auto-scaling</span></div>
+          <div class="step"><span class="step-num">5</span><span class="step-text">Monitor with CloudWatch &amp; logs</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">GLOBAL ACCESS</span>
+      <span class="tag">ELASTICITY</span>
+      <span class="tag">COST OPTIMIZATION</span>
+      <span class="tag">HIGH AVAILABILITY</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 11: GCP DEPLOYMENT -->
+<section class="slide" id="slide-11" data-num="11">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">11</span><span class="slide-line"></span><span class="slide-tag">GCP</span></div>
+    <h2 class="reveal">DEPLOYMENT ON <span class="red">GOOGLE CLOUD</span></h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Key GCP Services</div>
+        <ul>
+          <li>Compute Engine — virtual machines</li>
+          <li>Cloud Functions — serverless</li>
+          <li>Cloud Storage — object store</li>
+          <li>Cloud SQL — managed databases</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Kubernetes Engine</div>
+        <p>GKE supports containerized microservices orchestration with automatic scaling, self-healing, and rolling deployments for Java apps.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">CI/CD Pipeline</div>
+        <ul>
+          <li>Cloud Build — automated builds</li>
+          <li>Artifact Registry — image storage</li>
+          <li>Automated testing &amp; deployment</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Scalability</div>
+        <p>Auto-scaling and high availability built-in for enterprise-grade Java applications — handling traffic spikes without manual intervention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: SECURITY -->
+<section class="slide" id="slide-12" data-num="12">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">12</span><span class="slide-line"></span><span class="slide-tag">Security</span></div>
+    <h2 class="reveal">CLOUD <span class="red">SECURITY</span> PRACTICES</h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Security Challenges</div>
+        <ul>
+          <li>Data breaches</li>
+          <li>Unauthorized access</li>
+          <li>Regulatory compliance</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Java-Specific Measures</div>
+        <ul>
+          <li>Encrypt data in transit &amp; at rest</li>
+          <li>Secure APIs with OAuth2 / JWT</li>
+          <li>Role-based access control (RBAC)</li>
+          <li>IAM policies enforcement</li>
+          <li>TLS/HTTPS for all communication</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">AWS Security Tools</div>
+        <ul>
+          <li>AWS Shield — DDoS protection</li>
+          <li>WAF — web application firewall</li>
+          <li>CloudTrail — audit logging</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Best Practices</div>
+        <ul>
+          <li>Regular vulnerability scanning</li>
+          <li>Timely security patching</li>
+          <li>GCP Security Command Center</li>
+          <li>Continuous security auditing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 13: NETFLIX INTRO -->
+<section class="slide" id="slide-13" data-num="13">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">13</span><span class="slide-line"></span><span class="slide-tag">Case Study</span></div>
+    <h2 class="reveal">NETFLIX <span class="red">CASE STUDY</span></h2>
+    <div class="content-grid">
+      <div class="card highlight" style="grid-column:1/-1;">
+        <div class="card-title">Migration Story</div>
+        <p>Netflix migrated from a monolithic architecture to a cloud-based microservices system using Java and AWS — enabling global scale for hundreds of millions of users.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Challenges Faced</div>
+        <ul>
+          <li>Managing millions of concurrent users</li>
+          <li>Ensuring uptime &amp; reliability</li>
+          <li>Dynamic scaling for global audience</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Approach Used</div>
+        <ul>
+          <li>Java microservices with Spring Cloud</li>
+          <li>Netflix OSS: Eureka, Hystrix, Ribbon</li>
+          <li>Docker containers + Kubernetes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 14: NETFLIX DETAILS -->
+<section class="slide" id="slide-14" data-num="14">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">14</span><span class="slide-line"></span><span class="slide-tag">Case Study</span></div>
+    <h2 class="reveal">NETFLIX MIGRATION <span class="red">DETAILS</span></h2>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title">Service Discovery</div>
+        <p>Eureka dynamically locates and registers services, enabling seamless communication without hardcoded endpoints across thousands of instances.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Fault Tolerance</div>
+        <p>Hystrix circuit breaker prevents cascading failures — if one service degrades, others remain unaffected and fallback gracefully.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Load Balancing</div>
+        <p>Ribbon and Spring Cloud Gateway intelligently route and distribute traffic across microservice instances for optimal performance.</p>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">Outcome</div>
+        <ul>
+          <li>Highly scalable, resilient architecture</li>
+          <li>Faster feature deployments</li>
+          <li>Significant cost optimization</li>
+          <li><span class="counter-val" data-counter="99" data-suffix=".99%+ uptime">0</span> uptime achieved</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 15: KEY LESSONS -->
+<section class="slide" id="slide-15" data-num="15">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">15</span><span class="slide-line"></span><span class="slide-tag">Takeaways</span></div>
+    <h2 class="reveal">KEY <span class="red">LESSONS</span></h2>
+    <div class="obj-list">
+      <div class="obj-item"><span class="obj-icon">⚡</span><span class="obj-text">Java + Cloud together enable scalable, resilient applications that handle enterprise-grade workloads.</span></div>
+      <div class="obj-item"><span class="obj-icon">🔧</span><span class="obj-text">Microservices architecture significantly improves fault isolation and overall deployment speed.</span></div>
+      <div class="obj-item"><span class="obj-icon">📊</span><span class="obj-text">Continuous monitoring and automated scaling are crucial for maintaining performance at scale.</span></div>
+      <div class="obj-item"><span class="obj-icon">🔐</span><span class="obj-text">Security integration from the start ensures compliance and effective data protection.</span></div>
+      <div class="obj-item"><span class="obj-icon">🌍</span><span class="obj-text">Real-world adoption (Netflix) demonstrates practical benefits and challenges of cloud migration.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 16: FUTURE TRENDS -->
+<section class="slide" id="slide-16" data-num="16">
+  <div class="slide-inner">
+    <div class="slide-accent"><span class="slide-num">16</span><span class="slide-line"></span><span class="slide-tag">Future</span></div>
+    <h2 class="reveal">FUTURE <span class="red">TRENDS</span></h2>
+    <div class="content-grid three">
+      <div class="card">
+        <div class="card-title">Serverless Java</div>
+        <p>AWS Lambda and GCP Functions enabling event-driven, pay-per-invocation Java functions with zero infrastructure management.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">AI / ML Integration</div>
+        <p>Cloud platforms embedding AI and ML capabilities directly into Java apps — intelligent recommendations, predictions, automation.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Multi-Cloud Strategy</div>
+        <p>Enterprises adopting multi-cloud and hybrid strategies to avoid vendor lock-in and optimize for cost and performance.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Advanced Observability</div>
+        <p>Prometheus, Grafana, and OpenTelemetry providing deep insight into distributed system behavior and performance.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Container Growth</div>
+        <p>Continued growth of microservices and containerized enterprise Java apps driven by Kubernetes adoption worldwide.</p>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">The Direction</div>
+        <p>Java continues to evolve for cloud-native: faster startups, lower memory, native images via GraalVM — the future is bright.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 17: Q&A / CLOSING -->
+<section class="slide slide-closing" id="slide-17" data-num="17">
+  <div class="slide-inner" style="z-index:2;">
+    <div class="slide-accent" style="justify-content:center;"><span class="slide-num">17</span><span class="slide-line" style="max-width:40px;"></span><span class="slide-tag">Closing</span></div>
+    <div class="close-icon">🎤</div>
+    <h2 class="reveal" style="font-size: clamp(3rem,8vw,6rem); margin-bottom:1rem;">Q &amp; <span class="red">A</span></h2>
+    <div class="title-divider" style="margin:1.5rem auto;"></div>
+    <div class="quote-block" style="max-width:680px; margin:0 auto 2rem;">
+      "The cloud is not just a technology; it is a platform for innovation."
+    </div>
+    <p style="color:var(--gray); font-size:1rem; margin-bottom:2rem;">Thank you for your attention. We welcome your questions and discussion.</p>
+    <div class="tags" style="justify-content:center;">
+      <span class="tag">JAVA</span>
+      <span class="tag">CLOUD COMPUTING</span>
+      <span class="tag">MICROSERVICES</span>
+      <span class="tag">SPRING CLOUD</span>
+      <span class="tag">AWS</span>
+      <span class="tag">GCP</span>
+    </div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
